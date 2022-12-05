@@ -1,7 +1,16 @@
 <?php
 session_start();
-$isLoggedIn = $_SESSION["logged_in"];
-
+$isLoggedIn = false;;
+if(isset($_SESSION["logged_in"])){
+    $isLoggedIn = $_SESSION["logged_in"];
+}
+if(!$isLoggedIn){
+    header("location: login.php");
+}
+$id = null;;
+if(isset($_SESSION['id'])){
+    $id = $_SESSION['id'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,7 +101,7 @@ $isLoggedIn = $_SESSION["logged_in"];
                         </tr>
                     </thead>
                     <thead>
-                        <?php $query = "select * from user_music where userid = " . $_SESSION['id'] . ";";
+                        <?php $query = "select * from user_music where userid = " . $id . ";";
                         $result = $conn->query($query);
                         $no = 0;
                         if ($result->num_rows > 0) : ?>
@@ -162,7 +171,6 @@ $isLoggedIn = $_SESSION["logged_in"];
     //     formData.append("files[]", musicFile,"files[]");
     //     formData.append("files[]", thumbnailFile,"files[]");
     //     formData.append("name", name);
-    //     let id = '<?php $_SESSION["id"]; ?>';
     //     $.ajax({
     //         method: "POST",
     //         url: "service/upload.file.php",

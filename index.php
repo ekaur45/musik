@@ -1,6 +1,10 @@
 <?php
 session_start();
-$isLoggedIn = $_SESSION["logged_in"];
+$isLoggedIn = false;;
+if(isset($_SESSION["logged_in"])){
+    $isLoggedIn = $_SESSION["logged_in"];
+}
+
 $q = "";
 if (sizeof($_GET) && isset($_GET['q']) && !empty($_GET["q"])) {
     $q = $_GET["q"];
