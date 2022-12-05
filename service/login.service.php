@@ -14,7 +14,7 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $_SESSION["logged_in"] = true;
     $_SESSION["id"] = $row["id"];
-    $_SESSION["firstName"] = $row["firstName"];
+    $_SESSION["firstName"] = $row["fIrstName"];
     $_SESSION["lastName"] = $row["lastName"];
     header("location: ../index.php");
 

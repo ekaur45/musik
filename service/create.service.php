@@ -9,8 +9,9 @@ $hashedPassword = md5($password);
 $query = "insert into users(firstName,lastName,email,password)values('$firstName','$lastName','$email','$hashedPassword');";
 
 if ($conn->multi_query($query) === TRUE) {
-    $_SESSION["logged_in"] = true;
-    header("location: ../index.php");
+    //$_SESSION["logged_in"] = true;
+    
+    header("location: ../login.php");
   } else {
     echo "Error: " . $query . "<br>" . $conn->error;
   }

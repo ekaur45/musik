@@ -9,11 +9,11 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="index.php">Home</a>
         </li>
-        <?php if($isLoggedIn):?>
-            <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="add-music.php">Add Music</a>
-        </li>
-        <?php endif;?>
+        <?php if ($isLoggedIn) : ?>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="add-music.php">Add Music</a>
+          </li>
+        <?php endif; ?>
         <!-- <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
         </li>
@@ -32,15 +32,18 @@
           <a class="nav-link disabled">Disabled</a>
         </li> -->
       </ul>
-      <?php if(!$isLoggedIn):?>
-      <form class="d-flex" role="search" action="login.php">
-        <button class="btn btn-outline-success" type="submit">Login</button>
-      </form>
-      <?php else:?>
-        <form class="d-flex" role="search" action="logout.php">
-        <button class="btn btn-outline-success" type="submit">Logout</button>
-      </form>
-        <?php endif;?>
+      <?php if (!$isLoggedIn) : ?>
+        <form class="d-flex" role="search" action="login.php">
+          <button class="btn btn-outline-success" type="submit">Login</button>
+        </form>
+      <?php else : ?>
+        <form class="d-flex align-items-center" role="search" action="logout.php">
+          <span>
+            <?php echo $_SESSION["firstName"] ." ". $_SESSION["lastName"] ?>
+          </span>
+          <button class="btn btn-outline-success ms-3" type="submit">Logout</button>
+        </form>
+      <?php endif; ?>
     </div>
   </div>
 </nav>

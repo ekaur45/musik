@@ -108,11 +108,13 @@ $isLoggedIn = $_SESSION["logged_in"];
                                         <a href="<?php echo $row["fileLocation"]; ?>" target="_blank"><?php echo $row["fileLocation"]; ?></a>
                                     </td>
                                     <td>
-
+                                        <img style="width:65px" src="<?php echo $row["picLocation"];?>" alt="">
                                     </td>
-                                    <td>
-                                        <button class="btn btn-link">Add Thumbnail</button> | 
-                                        <button class="btn btn-link text-danger">Delete</button>
+                                    <td>                                       
+                                        <form action="service/delete.musik.php" method="post">
+                                            <input type="hidden" name="_id" value="<?php echo $row["id"];?>"/>
+                                            <button class="btn btn-link text-danger">Delete</button>
+                                        </form> 
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
