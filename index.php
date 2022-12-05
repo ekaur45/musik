@@ -2,9 +2,9 @@
 session_start();
 $isLoggedIn = $_SESSION["logged_in"];
 $q = "";
-if(sizeof($_GET)&&isset($_GET['q'])&&!empty($_GET["q"])){
+if (sizeof($_GET) && isset($_GET['q']) && !empty($_GET["q"])) {
     $q = $_GET["q"];
-} 
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,19 +25,19 @@ if(sizeof($_GET)&&isset($_GET['q'])&&!empty($_GET["q"])){
         <div class="row mb-3">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Search / filter</div>                    
-                
-                <form class="card-body">
-                    <div class="d-flex">
+                    <div class="card-header">Search / filter</div>
 
-                        <input type="text" class="form-control" name="q" placeholder="Search" value="<?php echo $q;?>"/>
-                        <button class="btn btn-primary ms-3" type="submit">Search</button>
-                        <?php if($q):?>
-                        <button class="btn btn-danger ms-3" type="reset" onclick="location.href='index.php'">Clear</button>
-                        <?php endif;?>
-                    </div>
-                </form>
-            </div>
+                    <form class="card-body">
+                        <div class="d-flex">
+
+                            <input type="text" class="form-control" name="q" placeholder="Search" value="<?php echo $q; ?>" />
+                            <button class="btn btn-primary ms-3" type="submit">Search</button>
+                            <?php if ($q) : ?>
+                                <button class="btn btn-danger ms-3" type="reset" onclick="location.href='index.php'">Clear</button>
+                            <?php endif; ?>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -46,35 +46,63 @@ if(sizeof($_GET)&&isset($_GET['q'])&&!empty($_GET["q"])){
             <?php
             include_once "db/connection.php";
             //var_export( sizeof($_GET));
-           
-            $query = "select * from user_music where name like '%".$q."%' order by id desc;";
+
+            $query = "select * from user_music um join users u on um.userid = u.id  where um.name like '%" . $q . "%' order by um.id desc;";
+            //echo $query;
             $result = $conn->query($query);
             if ($result->num_rows > 0) : ?>
                 <?php while ($row = $result->fetch_assoc()) : ?>
                     <div class="col-md-2">
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-">
 
-                                <a href="<?php echo $row["fileLocation"]; ?>" target="_blank"><?php echo $row["name"]; ?>
-                                <img class="w-100" src="<?php echo $row["picLocation"];?>" alt="">
-                            </a>
-                        </div>
+                                <a data-music_name="<?php echo $row["fileLocation"]; ?>" class="music" target="_blank" style="cursor:pointer;">
+
+                                    <img class="w-100" src="<?php echo $row["picLocation"]; ?>" alt="">
+                                    <div class="d-flex flex-column bottom-0 w-100 ps-2 pe-2">
+
+                                        <span>
+                                            <?php echo $row["name"]; ?>
+                                        </span>
+                                        <span>
+                                            Auhtor: <?php echo $row["fIrstName"]; ?> <?php echo $row["lastName"]; ?>
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 <?php endwhile; ?>
             <?php
-            else:
+            else :
             ?>
-            <div class="col-md-12">
+                <div class="col-md-12">
 
-                <div class="alert alert-primary" role="alert">
-                    No Music Found. <?php if($q) echo "Searched query '<b>".$q."</b>'"; ?>
+                    <div class="alert alert-primary" role="alert">
+                        No Music Found. <?php if ($q) echo "Searched query '<b>" . $q . "</b>'"; ?>
+                    </div>
                 </div>
-            </div>
             <?php endif; ?>
         </div>
     </div>
+    <div class="bottom-0 music-player position-absolute w-100">
+    <audio preload="auto" controls id="music-player">
+					<source src="https://www.w3schools.com/html/horse.mp3">
+		</audio>
+    </div>
     <?php include_once "./src/footer.php"; ?>
+    <script>
+        $(document).ready(function() {
+            $('audio').audioPlayer();
+            $('.music').on('click', function() {
+                let name = $(this).data("music_name");
+                $("#music-player").attr("src",name);
+                $(".audioplayer-playpause").click()
+            })
+        })
+
+     
+    </script>
 </body>
 
 </html>
