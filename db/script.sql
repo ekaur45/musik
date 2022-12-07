@@ -61,3 +61,7 @@ CREATE TABLE `users` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2022-12-05 21:03:13
+
+
+
+ADD COLUMN `genre` VARCHAR(500) NULL AFTER `picLocation`;

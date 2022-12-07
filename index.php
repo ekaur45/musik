@@ -60,7 +60,7 @@ if (sizeof($_GET) && isset($_GET['q']) && !empty($_GET["q"])) {
                         <div class="card">
                             <div class="card-">
 
-                                <a data-music_name="<?php echo $row["fileLocation"]; ?>" class="music" target="_blank" style="cursor:pointer;">
+                                <a data-music_name="<?php echo $row["fileLocation"]; ?>" class="music" target="_blank" style="cursor:pointer;color:black">
 
                                     <img class="w-100" src="<?php echo $row["picLocation"]; ?>" alt="">
                                     <div class="d-flex flex-column bottom-0 w-100 ps-2 pe-2">
@@ -69,7 +69,10 @@ if (sizeof($_GET) && isset($_GET['q']) && !empty($_GET["q"])) {
                                             <?php echo $row["name"]; ?>
                                         </span>
                                         <span>
-                                            Auhtor: <?php echo $row["fIrstName"]; ?> <?php echo $row["lastName"]; ?>
+                                            <b>Auhtor:</b> <?php echo $row["fIrstName"]; ?> <?php echo $row["lastName"]; ?>
+                                        </span>
+                                        <span>
+                                        <b>Genre:</b> <?php echo $row["genre"]; ?>
                                         </span>
                                     </div>
                                 </a>

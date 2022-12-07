@@ -53,18 +53,23 @@ if(isset($_SESSION['id'])){
 
             <div class="card-body">
                 <form id="addMusicForm" class="row" method="post"  action="service/add.musik.php">
-                    <div class="col-md-4">
+                <div class="col-md-3">
                         <label for="">Name</label>
                         <input type="text" name="name" class="form-control" placeholder="name">
                     </div>
                     <div class="col-md-3">
+                        <label for="">Genre</label>
+                        <input type="text" name="genre" class="form-control" placeholder="name">
+                    </div>
+                    <div class="col-md-2">
                         <label for="musicFile1">Music file</label>
                         <input type="file" name="musicFile1" id="musicFile1" class="form-control file" accept=".mp3,audio/*" placeholder="Music file">
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label for="thumnail1">Thumbnail file</label>
                         <input type="file" name="thumnail1" id="thumnail1" accept="image/*" class="form-control file" placeholder="Music file">
                     </div>
+                    
                     <input type="hidden" name="musik" id="musik-hid"/>
                     <input type="hidden" name="thumbnail" id="thumbnail-hid"/>
                     <div class="col-md-2">
@@ -86,8 +91,10 @@ if(isset($_SESSION['id'])){
                                 No
                             </th>
                             <th>
+                                Genre
+                            </th>
+                            <th>
                                 Name
-
                             </th>
                             <th>
                                 Music
@@ -109,6 +116,9 @@ if(isset($_SESSION['id'])){
                                 <tr>
                                     <td>
                                         <?php echo ++$no;?>
+                                    </td>
+                                    <td>
+                                        <?php echo $row["genre"]; ?>
                                     </td>
                                     <td>
                                         <?php echo $row["name"]; ?>
